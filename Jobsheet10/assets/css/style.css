@@ -1,0 +1,452 @@
+/* =====================================================================
+   STYLE.CSS - SIMPUS-Mini
+   Cara pakai: untuk ganti warna, cukup ubah kode warna di bagian
+   "VARIABEL WARNA" di bawah ini. Semua bagian yang memakai warna itu
+   akan ikut berubah.
+   ===================================================================== */
+
+
+/* =====================================================================
+   1. VARIABEL WARNA  <-- GANTI WARNA DI SINI
+   Format: --nama: #kodewarna;
+   Contoh kode warna: #d9534f (merah), #2e7d32 (hijau), #6a1b9a (ungu)
+   ===================================================================== */
+:root {
+    --warna-header:       #1d5b8a;  /* latar bar atas (header)                     */
+    --warna-utama:        #1d5b8a;  /* link, judul halaman, header tabel, tombol    */
+    --warna-utama-gelap:  #164869;  /* tombol biru saat disorot (hover)             */
+    --warna-latar:        #f5f6f8;  /* latar belakang halaman                       */
+    --warna-teks:         #2b2b2b;  /* warna teks utama                             */
+    --warna-kartu:        #ffffff;  /* latar kartu putih (section)                  */
+    --warna-edit:         #f0ad4e;  /* tombol Edit (oranye)                         */
+    --warna-edit-hover:   #ec971f;  /* tombol Edit saat disorot                     */
+    --warna-hapus:        #d9534f;  /* tombol Hapus (merah)                         */
+    --warna-hapus-hover:  #c9302c;  /* tombol Hapus saat disorot                    */
+    --warna-garis:        #e2e6ea;  /* garis pemisah tabel                          */
+    --warna-baris-genap:  #f7f9fb;  /* baris tabel selang-seling                    */
+    --warna-baris-hover:  #eef4fa;  /* baris tabel saat disorot                     */
+    --warna-footer:       #7a8794;  /* teks footer                                  */
+}
+
+
+/* =====================================================================
+   2. RESET & BASE
+   Pengaturan dasar untuk seluruh halaman
+   ===================================================================== */
+* {
+    box-sizing: border-box;   /* lebar elemen sudah termasuk padding & border */
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;  /* GANTI jenis huruf di sini */
+    color: var(--warna-teks);                     /* warna teks                */
+    background-color: var(--warna-latar);         /* warna latar halaman       */
+    line-height: 1.5;                             /* jarak antar baris         */
+}
+
+a {
+    color: var(--warna-utama);   /* warna link */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;  /* link bergaris bawah saat disorot */
+}
+
+
+/* =====================================================================
+   3. HEADER & NAVBAR
+   Bar di bagian atas semua halaman (dari includes/header.php)
+   ===================================================================== */
+header {
+    background-color: var(--warna-header);  /* warna bar atas -> ubah di variabel */
+    color: #fff;                             /* warna teks di header               */
+    padding: 1rem 1.5rem;                    /* tinggi/lebar ruang dalam header    */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+header h1 {
+    font-size: 1.4rem;      /* ukuran tulisan "SIMPUS-Mini" */
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.25rem;           /* jarak antar menu */
+}
+
+header nav a {
+    color: #fff;            /* warna tulisan menu */
+    font-weight: 500;
+}
+
+/* Bagian kanan header: nama pengguna + Logout */
+.auth-status {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #fff;            /* warna nama pengguna */
+}
+
+.auth-status a {
+    color: #fff;            /* warna link Logout / Login */
+    text-decoration: underline;
+}
+
+
+/* =====================================================================
+   4. LAYOUT UTAMA
+   Isi halaman di tengah, dalam kartu putih
+   ===================================================================== */
+main {
+    max-width: 1000px;      /* lebar maksimal isi halaman */
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+section {
+    background-color: var(--warna-kartu);    /* warna kartu */
+    border-radius: 8px;                      /* kelengkungan sudut kartu */
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);   /* bayangan tipis */
+}
+
+section h2 {
+    margin-bottom: 1rem;
+    color: var(--warna-utama);   /* warna judul halaman (Daftar Buku, dll) */
+}
+
+
+/* =====================================================================
+   5. KARTU STATISTIK (hanya di Beranda: Total Buku, Total Anggota, dll)
+   ===================================================================== */
+main section:nth-of-type(2) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);   /* 3 kolom sama lebar */
+    gap: 1rem;
+}
+
+main section:nth-of-type(2) article {
+    background-color: var(--warna-baris-hover);   /* warna kotak statistik */
+    border-radius: 8px;
+    padding: 1.25rem;
+    text-align: center;
+}
+
+main section:nth-of-type(2) article h3 {
+    font-size: 0.95rem;
+    color: #55677a;              /* warna tulisan "Total Buku" */
+    margin-bottom: 0.5rem;
+}
+
+main section:nth-of-type(2) article p {
+    font-size: 1.8rem;           /* ukuran angka statistik */
+    font-weight: 700;
+    color: var(--warna-utama);   /* warna angka statistik */
+}
+
+
+/* =====================================================================
+   6. TABEL
+   ===================================================================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: left;
+    padding: 0.65rem 0.75rem;                       /* ruang dalam sel */
+    border-bottom: 1px solid var(--warna-garis);    /* garis pemisah baris */
+}
+
+thead {
+    background-color: var(--warna-utama);   /* warna baris judul kolom */
+    color: #fff;                            /* warna tulisan judul kolom */
+}
+
+tbody tr:nth-child(even) {
+    background-color: var(--warna-baris-genap);   /* baris genap (selang-seling) */
+}
+
+tbody tr:hover {
+    background-color: var(--warna-baris-hover);   /* baris saat disorot kursor */
+}
+
+
+/* =====================================================================
+   7. TOMBOL AKSI DI TABEL (Edit & Hapus)
+   Edit = link <a class="btn-edit">, Hapus = tombol di dalam <form>
+   ===================================================================== */
+
+/* Bentuk dan ukuran: berlaku untuk Edit DAN Hapus agar ukurannya sama */
+td a.btn-edit,
+td form button[type="submit"] {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;    /* UKURAN tombol: besar-kecil ruang dalam */
+    font-family: inherit;
+    font-size: 0.85rem;         /* UKURAN tulisan tombol                  */
+    line-height: 1.5;
+    border: none;
+    border-radius: 4px;         /* kelengkungan sudut tombol              */
+    color: #fff;                /* warna tulisan tombol                   */
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+/* Tombol Edit */
+td a.btn-edit {
+    background-color: var(--warna-edit);    /* warna Edit -> ubah di variabel */
+    margin-right: 0.35rem;                   /* jarak ke tombol Hapus          */
+}
+
+td a.btn-edit:hover {
+    background-color: var(--warna-edit-hover);
+    text-decoration: none;
+}
+
+/* Tombol Hapus */
+td form button[type="submit"] {
+    background-color: var(--warna-hapus);   /* warna Hapus -> ubah di variabel */
+}
+
+td form button[type="submit"]:hover {
+    background-color: var(--warna-hapus-hover);
+}
+
+
+/* =====================================================================
+   8. FORM
+   Form Tambah, Edit, Login, Registrasi, dan kotak pencarian
+   ===================================================================== */
+form p {
+    margin-bottom: 1rem;     /* jarak antar kolom isian */
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-weight: 600;
+    color: #444;             /* warna tulisan label */
+}
+
+form input,
+form select {
+    width: 100%;
+    max-width: 400px;         /* lebar maksimal kolom isian */
+    padding: 0.55rem 0.7rem;
+    border: 1px solid #cdd4da;   /* warna garis kolom isian */
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+/* Tombol submit biasa (Simpan, Update, Masuk, Daftar, Reset Data) */
+form button[type="submit"] {
+    background-color: var(--warna-utama);   /* warna tombol Simpan dkk */
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.5rem;                  /* ukuran tombol Simpan dkk */
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+form button[type="submit"]:hover {
+    background-color: var(--warna-utama-gelap);   /* warna saat disorot */
+}
+
+
+/* =====================================================================
+   9. FOOTER
+   ===================================================================== */
+footer {
+    text-align: center;
+    padding: 1.25rem;
+    color: var(--warna-footer);   /* warna tulisan footer */
+    font-size: 0.9rem;
+}
+
+
+/* =====================================================================
+   10. TABEL RESPONSIF
+   Tabel bisa digeser menyamping di layar sempit
+   ===================================================================== */
+.table-responsive {
+    overflow-x: auto;
+}
+
+
+/* =====================================================================
+   11. TOMBOL HAMBURGER (hanya tampil di HP, lihat bagian 16)
+   ===================================================================== */
+.nav-toggle-label {
+    display: none;
+    font-size: 1.6rem;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+
+/* =====================================================================
+   12. FLASH MESSAGE
+   Pesan sukses / error setelah suatu aksi
+   ===================================================================== */
+.flash {
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.flash-success {
+    background-color: #d4edda;   /* latar pesan sukses (hijau muda) */
+    color: #155724;              /* tulisan pesan sukses            */
+}
+
+.flash-error {
+    background-color: #f8d7da;   /* latar pesan error (merah muda)  */
+    color: #721c24;              /* tulisan pesan error             */
+}
+
+
+/* =====================================================================
+   13. PESAN ERROR VALIDASI
+   Teks merah di bawah input (dibuat oleh app.js)
+   ===================================================================== */
+.error {
+    display: block;
+    color: var(--warna-hapus);   /* warna teks error */
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+
+/* =====================================================================
+   14. KOLOM PENCARIAN
+   ===================================================================== */
+.search-box {
+    margin-bottom: 1rem;
+}
+
+.search-box input {
+    width: 100%;
+    max-width: 320px;           /* lebar kotak pencarian */
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #cdd4da;
+    border-radius: 4px;
+}
+
+
+/* =====================================================================
+   15. NAVIGASI HALAMAN (pagination)
+   Link "Sebelumnya  1  2  3  Berikutnya" di bawah tabel
+   ===================================================================== */
+.pagination {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1rem;
+}
+
+.pagination a {
+    padding: 0.4rem 0.75rem;
+    border: 1px solid #cdd4da;
+    border-radius: 4px;
+    color: var(--warna-utama);
+}
+
+.pagination a:hover {
+    background-color: var(--warna-baris-hover);
+    text-decoration: none;
+}
+
+.pagination a.active {
+    background-color: var(--warna-utama);   /* warna halaman yang sedang dibuka */
+    border-color: var(--warna-utama);
+    color: #fff;
+}
+
+/* Tombol Hapus di tabel: merah */
+/* ===== Tombol Hapus (merah) - taruh PALING BAWAH file ===== */
+
+
+/* =====================================================================
+   16. RESPONSIVE (tampilan di layar kecil)
+   ===================================================================== */
+
+/* Tablet ke bawah (lebar 768px atau kurang) */
+@media (max-width: 768px) {
+    main section:nth-of-type(2) {
+        grid-template-columns: repeat(2, 1fr);   /* kartu statistik jadi 2 kolom */
+    }
+}
+
+/* HP (lebar 480px atau kurang) */
+@media (max-width: 480px) {
+    header {
+        position: relative;
+    }
+
+    .nav-toggle-label {
+        display: block;          /* tombol hamburger muncul */
+    }
+
+    header nav {
+        display: none;           /* menu disembunyikan dulu */
+        width: 100%;
+        order: 3;
+        margin-top: 1rem;
+    }
+
+    header nav.nav-open {
+        display: block;          /* menu tampil saat tombol diklik */
+    }
+
+    header nav ul {
+        flex-direction: column;  /* menu tersusun ke bawah */
+        gap: 0.75rem;
+    }
+
+    main section:nth-of-type(2) {
+        grid-template-columns: 1fr;   /* kartu statistik jadi 1 kolom */
+    }
+
+    form input,
+    form select {
+        max-width: 100%;
+    }
+}
+
+
+/* ===== Badge Stok ===== */
+.badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;      /* besar kotak badge */
+    border-radius: 999px;        /* bentuk kapsul; ganti 4px kalau mau kotak */
+    font-size: 0.8rem;           /* ukuran tulisan badge */
+    font-weight: 600;
+    white-space: nowrap;         /* tulisan tidak turun ke baris baru */
+}
+
+.badge-tersedia {
+    background-color: #d4edda;   /* hijau muda */
+    color: #155724;
+}
+
+.badge-menipis {
+    background-color: #fff3cd;   /* kuning muda */
+    color: #856404;
+}
+
+.badge-habis {
+    background-color: #f8d7da;   /* merah muda */
+    color: #721c24;
+}
